@@ -1,6 +1,6 @@
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import EditIcon from './editIcon';
 import { useTemporaryState } from './hooks';
@@ -16,7 +16,7 @@ const Root = styled.div`
 
 const TimeOutput = styled.div`
     font-size: 4em;
-    font-size: min(4em, 8vw);
+    font-size: min(4em, 8vw, 15vh);
 `;
 
 const Placeholder = styled.button`

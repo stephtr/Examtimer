@@ -6,4 +6,26 @@ html {
   background: black;
   color: white;
   font-family: sans-serif;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+p:first-child, ul:first-child, ol:first-child {
+  margin-top: 0;
+}
+
+p, ul, ol {
+  margin: 0.5em 0;
 }
