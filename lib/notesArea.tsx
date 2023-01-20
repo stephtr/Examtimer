@@ -21,6 +21,7 @@ const TextOutput = styled.div`
     width: 100%;
     height: 100%;
     border: 2px transparent;
+    overflow: hidden;
 `;
 
 const Placeholder = styled.button`
