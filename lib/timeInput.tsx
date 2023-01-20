@@ -10,6 +10,8 @@ interface Props {
 
 const Input = styled.input`
     font-size: 2em;
+    width: 5em;
+    width: min(5em, 40vw);
 `;
 
 export default function TimeInput({ label, value, onChange, onEnterPressed }: Props) {
