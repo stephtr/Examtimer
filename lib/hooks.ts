@@ -6,12 +6,20 @@ export function useTemporaryState<T>(defaultValue: T, timeout: number = 1000, on
 
     const setter = (value: SetStateAction<T>) => {
         setValue(value);
-        if (timer) clearTimeout(timer);
-        setTimer(setTimeout(() => {
-            setValue(defaultValue);
-            setTimer(0);
-            onChangeBack?.(defaultValue);
-        }, timeout) as unknown as number);
+        setTimer((timer) => {
+            if (timer) clearTimeout(timer);
+            const currentTimer = setTimeout(() => {
+                setTimer((timer) => {
+                    if (timer == currentTimer) {
+                        setValue(defaultValue);
+                        onChangeBack?.(defaultValue);
+                        return 0;
+                    }
+                    return timer;
+                });
+            }, timeout) as unknown as number;
+            return currentTimer;
+        });
     };
 
     return [value, setter] as const;

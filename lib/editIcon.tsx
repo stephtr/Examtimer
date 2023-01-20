@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const IconHost = styled.div`
 background: transparent;
-border: 1.5px solid white;
+border: 2px solid white;
 border-radius: 100%;
 color: inherit;
 width: 2em;

@@ -1,7 +1,6 @@
-import { faCheckCircle, faEdit } from '@fortawesome/free-regular-svg-icons';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import EditIcon from './editIcon';
 import { useTemporaryState } from './hooks';
@@ -15,8 +14,14 @@ const Root = styled.div`
     align-items: center;
 `;
 
+const TimeOutput = styled.div`
+    font-size: 4em;
+    font-size: min(4em, 8vw);
+`;
+
 const Placeholder = styled.button`
     padding: 1em;
+    font-size: 1.5em;
     opacity: 0;
     background: transparent;
     color: inherit;
@@ -27,7 +32,7 @@ const Placeholder = styled.button`
         opacity: 0.5;
     }
 
-    ${Root}:hover & {           
+    &:hover:hover {           
         opacity: 1;
     }
 `;
@@ -35,7 +40,7 @@ const Placeholder = styled.button`
 const EditButton = styled.button`
     position: absolute;
     inset: 0;
-    background: rgba(0,0,0, 0.5);
+    background: rgba(0,0,0, 0.75);
     opacity: 0;
     display: flex;
     align-items: center;
@@ -43,6 +48,7 @@ const EditButton = styled.button`
     cursor: pointer;
     color: inherit;
     border: none;
+    font-size: 1.5em;
 
     ${Root}:hover & {
         opacity: 1;
@@ -51,10 +57,6 @@ const EditButton = styled.button`
 
 const Sep = styled.div`
     margin: 0 0.5em;
-`;
-
-const TimeOutput = styled.div`
-    font-size: 3em;
 `;
 
 
@@ -75,6 +77,7 @@ export default function TimeRange() {
         setEnd(e.target.value);
         setIsEditMode(true);
     };
+    const hasContent = start != '' || end != '';
 
     if (isEditMode) {
         return (
@@ -86,12 +89,14 @@ export default function TimeRange() {
     }
     return (
         <Root>
-            <TimeOutput>{start}{start && end && '–'}{end}</TimeOutput>
 
-            {start + end && <EditButton title="Edit" onClick={switchToEditMode}><EditIcon /></EditButton>}
-
-            {start + end == '' &&
-                <Placeholder onClick={switchToEditMode}>
+            {hasContent ?
+                <>
+                    <TimeOutput>{start}{(start && end) && '–'}{end}</TimeOutput>
+                    <EditButton title="Edit" type="button" onClick={switchToEditMode}><EditIcon /></EditButton>
+                </>
+                :
+                <Placeholder onClick={switchToEditMode} type="button">
                     Start–End <FontAwesomeIcon icon={faEdit} />
                 </Placeholder>
             }

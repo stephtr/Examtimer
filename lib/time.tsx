@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const TimeContainer = styled.div`
-font-size: 25vh;
+font-size: 20vh;
+font-size: min(25vh, 30vw);
 text-align: center;
 `;
 
