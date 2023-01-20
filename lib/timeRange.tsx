@@ -93,10 +93,10 @@ export default function TimeRange() {
             {hasContent ?
                 <>
                     <TimeOutput>{start}{(start && end) && '–'}{end}</TimeOutput>
-                    <EditButton title="Edit" type="button" onClick={switchToEditMode}><EditIcon /></EditButton>
+                    <EditButton title="Edit time range" type="button" onClick={switchToEditMode}><EditIcon /></EditButton>
                 </>
                 :
-                <Placeholder onClick={switchToEditMode} type="button">
+                <Placeholder onClick={switchToEditMode} type="button" title="Edit time range">
                     Start–End <FontAwesomeIcon icon={faEdit} />
                 </Placeholder>
             }

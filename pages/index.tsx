@@ -14,10 +14,12 @@ export default function Home() {
   const [showHover, setShowHover] = useTemporaryState(false, 5000);
 
   useEffect(() => {
-    const mouseMove = () => setShowHover(true);
-    window.addEventListener('mousemove', mouseMove);
-    return () => window.removeEventListener('mousemove', mouseMove);
-  });
+    const setHover = () => setShowHover(true);
+    setHover();
+    window.addEventListener('mousemove', setHover);
+    return () => window.removeEventListener('mousemove', setHover);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Host className={showHover ? 'show-hover' : ''}>
