@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkBreaks from 'remark-breaks';
-import dynamic from 'next/dynamic';
 
 import 'katex/dist/katex.min.css';
 
