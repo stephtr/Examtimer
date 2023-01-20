@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
-import breaks from 'remark-breaks';
+import remarkBreaks from 'remark-breaks';
+import dynamic from 'next/dynamic';
 
 import 'katex/dist/katex.min.css';
 
@@ -10,10 +9,21 @@ interface Props {
     children: string;
 }
 
-export default function MarkdownRender({ children }: Props) {
+const MathPackagesPromise = Promise.all([
+    import('remark-math'),
+    import('rehype-katex'),
+]);
+
+export default function MardownWithMathRenderer({ children }: Props) {
+    const [mathPackage, setMathPackage] = React.useState<[(typeof import('remark-math')), (typeof import('rehype-katex'))] | null>(null);
+    useEffect(() => {
+        MathPackagesPromise.then(setMathPackage);
+    }, [setMathPackage]);
 
     return (
-        <ReactMarkdown remarkPlugins={[remarkMath, breaks]} rehypePlugins={[rehypeKatex]}>
+        <ReactMarkdown
+            remarkPlugins={[remarkBreaks, ...mathPackage ? [mathPackage[0].default] : []]}
+            rehypePlugins={[...mathPackage ? [mathPackage[1].default] : []]}>
             {children}
         </ReactMarkdown>
     );
