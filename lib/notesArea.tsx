@@ -20,6 +20,7 @@ const TextOutput = styled.div`
     padding: 0.25em 0.5em;
     width: 100%;
     height: 100%;
+    border: 2px transparent;
 `;
 
 const Placeholder = styled.button`
@@ -68,6 +69,7 @@ const Textarea = styled.textarea`
     border-radius: 5px;
     padding: 0.25em 0.5em;
     font-size: 2em;
+    font-family: inherit;
 `;
 
 
