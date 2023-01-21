@@ -1,6 +1,6 @@
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import EditIcon from './editIcon';
 import { useTemporaryState } from './hooks';
@@ -85,6 +85,13 @@ export default function NotesArea() {
         setText(e.target.value);
         setIsEditMode(true);
     };
+    const onKeyUp = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.ctrlKey && e.key === 'Enter') {
+            submit();
+        }
+    };
+
+
     const hasContent = text != '';
 
     if (isEditMode) {
@@ -96,6 +103,7 @@ export default function NotesArea() {
                     value={text}
                     onChange={onTextChange}
                     onBlur={submit}
+                    onKeyUp={onKeyUp}
                     autoFocus
                 />
             </Root>);
