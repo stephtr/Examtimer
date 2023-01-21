@@ -1,4 +1,4 @@
-# Exam timer
+# Testzeit
 
 This is a website to display the current time and, optionally, a runtime, as well as notes.
 
